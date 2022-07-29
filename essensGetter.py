@@ -35,9 +35,10 @@ def fetch_Food_Name():
     data = soup.find_all(class_="meals__name")
     return remove_HTML(data)
 
-print(calendar.day_name[datetime.date.today().weekday()])
+
 # don't do anything on weekends
-if calendar.day_name[datetime.date.today().weekday()] == "Saturday" or calendar.day_name[datetime.date.today().weekday()] == "Sunday":
+if calendar.day_name[datetime.date.today().weekday()] == "Saturday" \
+        or calendar.day_name[datetime.date.today().weekday()] == "Sunday":
     print("Heute ist ein Wochenende")
 else:
     url = "https://www.studentenwerk-leipzig.de/mensen-cafeterien/speiseplan?location=140"  # URL

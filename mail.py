@@ -6,8 +6,13 @@ from formatting import format_string
 
 def send_Email(foodname, foodcategory, foodzusatz1, foodzusatz2, foodprice):
 
-    food1 = format_string(foodcategory[0]) + " (" + format_string(foodprice[0]) + ")" + ": " + format_string(foodname[0]) + " [" + format_string(foodzusatz1) + "]"
-    food2 = "\n" + format_string(foodcategory[1]) + " (" + format_string(foodprice[1]) + ")" +  ": " + format_string(foodname[1]) + " [" + format_string(foodzusatz2) + "]"
+    # Fleischgericht
+    food1 = format_string(foodcategory[0]) + " (" + format_string(foodprice[0]) + ")" + ": " \
+            + format_string(foodname[0]) + " [" + format_string(foodzusatz1) + "]"
+
+    # Vegetarisches Gericht
+    food2 = "\n" + format_string(foodcategory[1]) + " (" + format_string(foodprice[1]) + ")" \
+            + ": " + format_string(foodname[1]) + " [" + format_string(foodzusatz2) + "]"
 
     current_day = str(datetime.date.strftime(datetime.date.today(), "%d.%m.%Y"))
 
@@ -26,7 +31,8 @@ def send_Email(foodname, foodcategory, foodzusatz1, foodzusatz2, foodprice):
         else:
             names.append(receivers[x])
 
-    content = "Moin {}, \n \n" + "Schau dir an was es heute in der Kantine (Schoenauer Strasse) zu essen gibt: \n \n" + food1 + "\n" + food2 + "\n \n" + "Bis denne," + "\n" + "dein Food-Bot - " + current_day
+    content = "Moin {}, \n \n" + "Schau dir an was es heute in der Kantine (Schoenauer Strasse) zu essen gibt: \n \n" \
+              + food1 + "\n" + food2 + "\n \n" + "Bis denne," + "\n" + "dein Food-Bot - " + current_day
 
     SUBJECT = "Speiseplan - {} - " + current_day
 
