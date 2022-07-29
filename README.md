@@ -28,7 +28,10 @@ pip install requests-html
       laura@email.com
       ....
     ```
-5. To send Emails via your own SMTP-Server you have to enter your credentials  
+5. To send Emails via your own SMTP-Server you have to enter your credentials
+   1. therefore create a new file called "credentials.txt" and put your credentials in it.
+   2. the smtp-server, smtp-port, and email has to be hardcoded
 6. Run the script with "python3 essensGetter.py"
 
 **Note: You can execute the script via Linux cronjobs to automate the process**
+**If your are forcing any kind of error, take a look at the log file "essensGetter.log"**
