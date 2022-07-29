@@ -4,7 +4,12 @@ import datetime
 import calendar
 from formatting import convert_HTML_List, remove_HTML, format_food_price
 from mail import send_Email
+import logging
 
+logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w',
+                    format='%(asctime)s %(levelname)s - %(message)s', force=True, encoding='utf-8')
+
+logging.info("Started")
 
 def give_me_everything():
     data = soup.find_all(class_="meals")  # call everything that is in meals
@@ -39,14 +44,14 @@ def fetch_Food_Name():
 # don't do anything on weekends
 if calendar.day_name[datetime.date.today().weekday()] == "Saturday" \
         or calendar.day_name[datetime.date.today().weekday()] == "Sunday":
-    print("Heute ist ein Wochenende")
+    logging.info("Weekend -> no call on website and no other operations")
 else:
     url = "https://www.studentenwerk-leipzig.de/mensen-cafeterien/speiseplan?location=140"  # URL
     session = HTMLSession()  # Initialize HTML Session
     response = session.get(url)  # call the URL
 
     if response.status_code != 200:  # If response != 200 don't try to read the data
-        print("Error! Response = " + str(response.status_code))
+        logging.critical("Response != 200 " + str(response.status_code))
     else:
         soup = bs(response.content, "html.parser")  # html parser from BeautifulSoup
 

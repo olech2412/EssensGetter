@@ -3,6 +3,9 @@ import datetime
 import logging
 from formatting import format_string
 
+logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w',
+                    format='%(asctime)s %(levelname)s - %(message)s', force=True, encoding='utf-8')
+
 
 def send_Email(foodname, foodcategory, foodzusatz1, foodzusatz2, foodprice):
 
@@ -63,5 +66,6 @@ def send_Email(foodname, foodcategory, foodzusatz1, foodzusatz2, foodprice):
             smtpObj.sendmail(sender, emails[i], message)
 
         smtpObj.quit()
+        logging.info("Email sent successfully to: " + str(names))
     except Exception as e:
         logging.critical("Error with the email-sending: " + str(e))
