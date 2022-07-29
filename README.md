@@ -34,4 +34,5 @@ pip install requests-html
 6. Run the script with "python3 essensGetter.py"
 
 **Note: You can execute the script via Linux cronjobs to automate the process**
+
 **If your are forcing any kind of error, take a look at the log file "essensGetter.log"**
