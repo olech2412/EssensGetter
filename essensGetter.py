@@ -2,7 +2,7 @@ from requests_html import HTMLSession
 from bs4 import BeautifulSoup as bs
 import datetime
 import calendar
-from formatting import convert_HTML_List, remove_HTML, format_food_price
+from formatting import remove_HTML, format_food_price
 from mail import send_Email
 import logging
 
@@ -23,12 +23,6 @@ def fetch_prices():
     return data
 
 
-# Fetches the addons of the meals
-def fetch_beilagen():
-    data = soup.find_all(class_="u-list-bare")
-    return data
-
-
 # Fetches the category from the food
 def fetch_food_category():
     data = soup.find_all(class_="title-prim")
@@ -36,9 +30,19 @@ def fetch_food_category():
 
 
 # Fetches the names from the food
-def fetch_Food_Name():
+def fetch_food():
     data = soup.find_all(class_="meals__name")
-    return remove_HTML(data)
+    list_of_food = list()
+    for x in range(len(data)):
+        try:
+            list_of_food.append(data[x].__getattribute__("contents")[0])
+            list_of_food.append(data[x].findNext(class_="u-list-bare").__getattribute__("contents")[1].__getattribute__("contents")[0])
+        except AttributeError as attribute_error:
+            logging.warning("AttributeError: " + str(attribute_error) + " in " + str(data[x]))
+            list_of_food.append("")
+
+
+    return list_of_food
 
 
 # don't do anything on weekends
@@ -56,7 +60,7 @@ else:
         soup = bs(response.content, "html.parser")  # html parser from BeautifulSoup
 
         # give_me_everything() # Important to know which property's you can extract
-        beilagen = convert_HTML_List(fetch_beilagen())  # call the function to convert the HTML List to usable data
+        # convert the HTML List to usable data
+
         foodprice = format_food_price(fetch_prices())  # call the function to convert the HTML Stuff to usable data
-        send_Email(foodname=fetch_Food_Name(), foodcategory=fetch_food_category(), foodzusatz1=str(beilagen[0]),
-                   foodzusatz2=(beilagen[1]), foodprice=foodprice)
+        send_Email(food=fetch_food(), foodcategory=fetch_food_category(), foodprice=foodprice)
