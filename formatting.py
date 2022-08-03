@@ -1,43 +1,8 @@
 import logging
 
+
 logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w',
                     format='%(asctime)s %(levelname)s - %(message)s', force=True, encoding='utf-8')
-
-
-# Converts Beilagen to usable data
-def convert_HTML_List(data):
-    zusaetze_ges = data
-    zusaetze_gericht1 = list()
-    zusaetze_gericht2 = list()
-
-    logging.info("Before formatting: " + str(zusaetze_ges))
-
-    # remove HTML from the data
-    for x in range(len(zusaetze_ges)):
-        zusaetze_ges[x] = str(zusaetze_ges[x]).replace("<li>", "")
-        zusaetze_ges[x] = str(zusaetze_ges[x]).replace("</li>", "")
-        zusaetze_ges[x] = str(zusaetze_ges[x]).replace("<ul>", "")
-        zusaetze_ges[x] = str(zusaetze_ges[x]).replace("</ul>", "")
-        zusaetze_ges[x] = str(zusaetze_ges[x]).replace("<ul >\n", "")
-        zusaetze_ges[x] = str(zusaetze_ges[x]).replace("'", "")
-        zusaetze_ges[x] = str(zusaetze_ges[x]).replace("<ul class=\"u-list-bare\">", "")
-
-    # remove the first and the last \n so the values can be seperate by ", "
-    zusaetze_gericht1 = str(zusaetze_ges[0])
-    zusaetze_gericht1 = zusaetze_gericht1[1:]
-    zusaetze_gericht1 = zusaetze_gericht1[:-1]
-    if str(zusaetze_gericht1).__contains__("\n"):
-        zusaetze_gericht1 = str(zusaetze_gericht1).replace("\n", ", ")  # seperate the values by ", "
-
-    zusaetze_gericht2 = str(zusaetze_ges[1])
-    zusaetze_gericht2 = zusaetze_gericht2[1:]
-    zusaetze_gericht2 = zusaetze_gericht2[:-1]
-    if str(zusaetze_gericht2).__contains__("\n"):
-        zusaetze_gericht2 = str(zusaetze_gericht2).replace("\n", ", ")
-
-    logging.info("After formatting: " + str(zusaetze_gericht1) + "&&" +  str(zusaetze_gericht2))
-
-    return zusaetze_gericht1, zusaetze_gericht2  # return the Beilagen as
 
 
 # Removes the HTML from the data

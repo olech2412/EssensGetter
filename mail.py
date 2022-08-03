@@ -7,15 +7,15 @@ logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w
                     format='%(asctime)s %(levelname)s - %(message)s', force=True, encoding='utf-8')
 
 
-def send_Email(foodname, foodcategory, foodzusatz1, foodzusatz2, foodprice):
+def send_Email(food, foodcategory, foodprice):
 
     # Fleischgericht
     food1 = format_string(foodcategory[0]) + " (" + format_string(foodprice[0]) + ")" + ": " \
-            + format_string(foodname[0]) + " [" + format_string(foodzusatz1) + "]"
+            + format_string(food[0]) + " [" + format_string(food[1]) + "]"
     logging.info("Food1: " + food1)
     # Vegetarisches Gericht
     food2 = "\n" + format_string(foodcategory[1]) + " (" + format_string(foodprice[1]) + ")" \
-            + ": " + format_string(foodname[1]) + " [" + format_string(foodzusatz2) + "]"
+            + ": " + format_string(food[2]) + " [" + format_string(food[3]) + "]"
     logging.info("Food2: " + food2)
 
     current_day = str(datetime.date.strftime(datetime.date.today(), "%d.%m.%Y"))
