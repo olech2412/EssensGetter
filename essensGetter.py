@@ -1,5 +1,5 @@
 from requests_html import HTMLSession
-from bs4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup as bs, Tag
 import datetime
 import calendar
 from formatting import remove_HTML, format_food_price
@@ -33,10 +33,28 @@ def fetch_food_category():
 def fetch_food():
     data = soup.find_all(class_="meals__name")
     list_of_food = list()
+    beilagen = list()
+    test = data[0].findNext(class_="u-list-bare").__getattribute__("contents")
     for x in range(len(data)):
         try:
             list_of_food.append(data[x].__getattribute__("contents")[0])
-            list_of_food.append(data[x].findNext(class_="u-list-bare").__getattribute__("contents")[1].__getattribute__("contents")[0])
+            try:
+                for i in range(len(data[x].findNext(class_="u-list-bare").__getattribute__("contents"))):
+                    if data[x].findNext(class_="u-list-bare").__getattribute__("contents")[i] != "\n":
+                        beilagen.append(data[x].findNext(class_="u-list-bare").__getattribute__("contents")[i].get_text())
+                    if i+1 == len(data[x].findNext(class_="u-list-bare").__getattribute__("contents")):
+                        if(len(beilagen) == 1):
+                            list_of_food.append(beilagen[0])
+                        elif(len(beilagen) > 1):
+                            beilagen = ", ".join(beilagen)
+                            list_of_food.append(beilagen)
+                        else:
+                            list_of_food.append("")
+                        beilagen = list()
+            except Exception as e:
+                logging.warning("Warn: " + str(e) + " in " + str(data[x]))
+                beilagen.append("")
+            #list_of_food.append(data[x].findNext(class_="u-list-bare").__getattribute__("contents")[1].__getattribute__("contents")[0])
         except AttributeError as attribute_error:
             logging.warning("AttributeError: " + str(attribute_error) + " in " + str(data[x]))
             list_of_food.append("")
