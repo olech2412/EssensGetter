@@ -14,7 +14,7 @@ def send_Email(food, foodcategory, foodprice):
             + format_string(food[0]) + " [" + format_string(food[1]) + "]"
     logging.info("Food1: " + food1)
     # Vegetarisches Gericht
-    food2 = "\n" + format_string(foodcategory[1]) + " (" + format_string(foodprice[1]) + ")" \
+    food2 = format_string(foodcategory[1]) + " (" + format_string(foodprice[1]) + ")" \
             + ": " + format_string(food[2]) + " [" + format_string(food[3]) + "]"
     logging.info("Food2: " + food2)
 
