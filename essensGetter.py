@@ -38,26 +38,29 @@ def fetch_food():
     for x in range(len(data)):
         try:
             list_of_food.append(data[x].__getattribute__("contents")[0])
-            try:
-                for i in range(len(data[x].findNext(class_="u-list-bare").__getattribute__("contents"))):
-                    if data[x].findNext(class_="u-list-bare").__getattribute__("contents")[i] != "\n":
-                        beilagen.append(data[x].findNext(class_="u-list-bare").__getattribute__("contents")[i].get_text())
-                    if i+1 == len(data[x].findNext(class_="u-list-bare").__getattribute__("contents")):
-                        if(len(beilagen) == 1):
-                            list_of_food.append(beilagen[0])
-                        elif(len(beilagen) > 1):
-                            beilagen = ", ".join(beilagen)
-                            list_of_food.append(beilagen)
-                        else:
-                            list_of_food.append("")
-                        beilagen = list()
-            except Exception as e:
-                logging.warning("Warn: " + str(e) + " in " + str(data[x]))
-                beilagen.append("")
-            #list_of_food.append(data[x].findNext(class_="u-list-bare").__getattribute__("contents")[1].__getattribute__("contents")[0])
+            if data[x].findNext(class_="u-list-bare").__getattribute__("contents")[0] is not None:
+                try:
+                    for i in range(len(data[x].findNext(class_="u-list-bare").__getattribute__("contents"))):
+                        if data[x].findNext(class_="u-list-bare").__getattribute__("contents")[i] != "\n":
+                            beilagen.append(data[x].findNext(class_="u-list-bare").__getattribute__("contents")[i].get_text())
+                        if i+1 == len(data[x].findNext(class_="u-list-bare").__getattribute__("contents")):
+                            if(len(beilagen) == 1):
+                                list_of_food.append(beilagen[0])
+                            elif(len(beilagen) > 1):
+                                beilagen = ", ".join(beilagen)
+                                list_of_food.append(beilagen)
+                            else:
+                                list_of_food.append("")
+                            beilagen = list()
+                except Exception as e:
+                    logging.warning("Warn: " + str(e) + " in " + str(data[x]))
+                    beilagen.append("")
+            else:
+                logging.warning("No beilagen found for meal: " + data[x].get_text())
+                list_of_food.append("")
         except AttributeError as attribute_error:
             logging.warning("AttributeError: " + str(attribute_error) + " in " + str(data[x]))
-            list_of_food.append("")
+            list_of_food.append("Keine Beilagen")
 
 
     return list_of_food
