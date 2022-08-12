@@ -36,3 +36,6 @@ pip install requests-html
 **Note: You can execute the script via Linux cronjobs to automate the process**
 
 **If your are forcing any kind of error, take a look at the log file "essensGetter.log"**
+
+## How to use the AdminTool?
+The AdminTool is a Vaadin Application. It allows you to manage the data of the service. You can add recievers, delete recievers, and send emails to the recievers (maintenance or something else). It also allows you to unable the service for vacations.
