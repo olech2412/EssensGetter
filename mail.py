@@ -1,6 +1,11 @@
+import os
 import smtplib
 import datetime
 import logging
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 from formatting import format_string
 
 logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w',
@@ -8,7 +13,6 @@ logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w
 
 
 def send_Email(food, foodcategory, foodprice):
-
     # Fleischgericht
     food1 = format_string(foodcategory[0]) + " (" + format_string(foodprice[0]) + ")" + ": " \
             + format_string(food[0]) + " [" + format_string(food[1]) + "]"
@@ -46,6 +50,22 @@ def send_Email(food, foodcategory, foodprice):
 
     SUBJECT = "Speiseplan - {} - " + current_day
 
+    with open("EssensGetter Logo.png", 'rb') as f:
+        img_data = f.read()
+
+    msg = MIMEMultipart()
+    msg['Subject'] = 'Speiseplan'
+    msg['From'] = 'essensGetter@t-online.de'
+    msg['To'] = 'olechristoph2412@gmail.com'
+
+    text = MIMEText('<img src="cid:image1">', 'html')
+    msg.attach(text)
+    fp = open('EssensGetter_Logo_small.png', 'rb')
+    msgImage = MIMEImage(fp.read())
+    fp.close()
+    msgImage.add_header('Content-ID', '<image1>')
+    msg.attach(msgImage)
+
     try:
         smtpServer = "securesmtp.t-online.de"
         port = 587
@@ -62,8 +82,8 @@ def send_Email(food, foodcategory, foodprice):
         smtpObj.login(username, password)
 
         for i in range(len(names)):
-            message = 'Subject: {}\n\n{}'.format(SUBJECT.format(names[i]), content.format(names[i]))
-            smtpObj.sendmail(sender, emails[i], message)
+            # message = 'Subject: {}\n\n{}'.format(SUBJECT.format(names[i]), content.format(names[i]))
+            smtpObj.sendmail(sender, emails[i], content)
 
         smtpObj.quit()
         logging.info("Email sent successfully to: " + str(names))

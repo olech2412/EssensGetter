@@ -1,5 +1,5 @@
 from requests_html import HTMLSession
-from bs4 import BeautifulSoup as bs, Tag
+from bs4 import BeautifulSoup as bs
 import datetime
 import calendar
 from formatting import remove_HTML, format_food_price
@@ -10,6 +10,7 @@ logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w
                     format='%(asctime)s %(levelname)s - %(message)s', force=True, encoding='utf-8')
 
 logging.info("Started")
+
 
 def give_me_everything():
     data = soup.find_all(class_="meals")  # call everything that is in meals
@@ -34,7 +35,6 @@ def fetch_food():
     data = soup.find_all(class_="meals__name")
     list_of_food = list()
     beilagen = list()
-    test = data[0].findNext(class_="u-list-bare").__getattribute__("contents")
     for x in range(len(data)):
         try:
             list_of_food.append(data[x].__getattribute__("contents")[0])
@@ -42,11 +42,12 @@ def fetch_food():
                 try:
                     for i in range(len(data[x].findNext(class_="u-list-bare").__getattribute__("contents"))):
                         if data[x].findNext(class_="u-list-bare").__getattribute__("contents")[i] != "\n":
-                            beilagen.append(data[x].findNext(class_="u-list-bare").__getattribute__("contents")[i].get_text())
-                        if i+1 == len(data[x].findNext(class_="u-list-bare").__getattribute__("contents")):
-                            if(len(beilagen) == 1):
+                            beilagen.append(
+                                data[x].findNext(class_="u-list-bare").__getattribute__("contents")[i].get_text())
+                        if i + 1 == len(data[x].findNext(class_="u-list-bare").__getattribute__("contents")):
+                            if len(beilagen) == 1:
                                 list_of_food.append(beilagen[0])
-                            elif(len(beilagen) > 1):
+                            elif len(beilagen) > 1:
                                 beilagen = ", ".join(beilagen)
                                 list_of_food.append(beilagen)
                             else:
@@ -61,7 +62,6 @@ def fetch_food():
         except AttributeError as attribute_error:
             logging.warning("AttributeError: " + str(attribute_error) + " in " + str(data[x]))
             list_of_food.append("Keine Beilagen")
-
 
     return list_of_food
 
@@ -83,5 +83,5 @@ else:
         # give_me_everything() # Important to know which property's you can extract
         # convert the HTML List to usable data
 
-        foodprice = format_food_price(fetch_prices())  # call the function to convert the HTML Stuff to usable data
-        send_Email(food=fetch_food(), foodcategory=fetch_food_category(), foodprice=foodprice)
+        food_price = format_food_price(fetch_prices())  # call the function to convert the HTML Stuff to usable data
+        send_Email(food=fetch_food(), foodcategory=fetch_food_category(), foodprice=food_price)
