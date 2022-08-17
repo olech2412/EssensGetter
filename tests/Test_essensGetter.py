@@ -1,5 +1,5 @@
 import unittest
-import essensGetter
+import essensGetter.essensGetter as essensGetter
 
 class Test_essensGetter(unittest.TestCase):
 
@@ -32,7 +32,6 @@ class Test_essensGetter(unittest.TestCase):
         self.assertIsNot(essensGetter.fetch_food(), [])
         self.assertGreater(len(essensGetter.fetch_food()), 0)
         self.assertLess(len(essensGetter.fetch_food()), 5)
-
 
 if __name__ == '__main__':
     unittest.main()

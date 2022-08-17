@@ -25,7 +25,7 @@ def send_Email(food, foodcategory, foodprice):
     # add all Emails an Names to the list
     # TODO maybe use a dictionary instead of a list
     try:
-        with open("receivers") as file:
+        with open("essensGetter/receivers") as file:
             receivers = list()
             while line := file.readline().rstrip():
                 receivers.append(line)
@@ -59,7 +59,7 @@ def send_Email(food, foodcategory, foodprice):
         # Erzeugen einer Mail Session
         smtpObj = smtplib.SMTP(smtpServer, port)
         smtpObj.starttls()
-        with open("credentials") as file:
+        with open("essensGetter/credentials") as file:
             while line := file.readline().rstrip():
                 password = line
         smtpObj.login(username, password)
