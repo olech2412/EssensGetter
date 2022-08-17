@@ -17,10 +17,13 @@ def remove_HTML(object):
             object[i] = secondsplit
     elif isinstance(object, str):
         logging.error("A string is given -> no formatting ")
+        print("A string is given -> no formatting ")
     else:
         logging.error("Unknown datatype -> no formatting")
+        print("Unknown datatype -> no formatting")
 
     logging.info("After fromatting: " + str(object))
+    print("After fromatting: " + str(object))
 
     return object
 
@@ -66,10 +69,11 @@ def format_string(string):
 
 # Format the prices -> remove HTML Stuff and unnecessary stuff
 def format_food_price(data):
-    logging.info("Prices before formatting: " + str(data))
+    logging.info("Prices before formatting:\n " + str(data))
     for x in range(len(data)):
         data[x] = str(data[x]).replace("<p class=\"meals__price\">\n<span class=\"u-hidden\">Preise:</span>\n", "")
         data[x] = str(data[x]).replace("</p>", "")
         data[x] = str(data[x]).replace(" ", "")
     logging.info("Prices after formatting: " + str(data))
+    print("Prices after formatting: " + str(data))
     return data

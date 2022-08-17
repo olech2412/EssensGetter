@@ -13,10 +13,12 @@ def send_Email(food, foodcategory, foodprice):
     food1 = format_string(foodcategory[0]) + " (" + format_string(foodprice[0]) + ")" + ": " \
             + format_string(food[0]) + " [" + format_string(food[1]) + "]"
     logging.info("Food1: " + food1)
+    print("Food1: " + food1)
     # Vegetarisches Gericht
     food2 = format_string(foodcategory[1]) + " (" + format_string(foodprice[1]) + ")" \
             + ": " + format_string(food[2]) + " [" + format_string(food[3]) + "]"
     logging.info("Food2: " + food2)
+    print("Food2: " + food2)
 
     current_day = str(datetime.date.strftime(datetime.date.today(), "%d.%m.%Y"))
 
@@ -29,6 +31,7 @@ def send_Email(food, foodcategory, foodprice):
                 receivers.append(line)
     except Exception as e:
         logging.critical("Error with the receivers-list: " + str(e))
+        print("Error with the receivers-list: " + str(e))
         return
 
     names = list()

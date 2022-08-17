@@ -46,5 +46,7 @@ try:
 
     smtpObj.quit()
     logging.info("Welcome Email sent successfully to: " + email)
+    print("Welcome Email sent successfully to: " + email)
 except Exception as e:
     logging.critical("Error with the email-sending: " + str(e))
+    print("Error with the email-sending: " + str(e))

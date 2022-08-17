@@ -54,12 +54,15 @@ def fetch_food():
                             beilagen = list()
                 except Exception as e:
                     logging.warning("Warn: " + str(e) + " in " + str(data[x]))
+                    print("Warn: " + str(e) + " in " + str(data[x]))
                     beilagen.append("")
             else:
                 logging.warning("No beilagen found for meal: " + data[x].get_text())
+                print("No beilagen found for meal: " + data[x].get_text())
                 list_of_food.append("")
         except AttributeError as attribute_error:
             logging.warning("AttributeError: " + str(attribute_error) + " in " + str(data[x]))
+            print("AttributeError: " + str(attribute_error) + " in " + str(data[x]))
             list_of_food.append("Keine Beilagen")
 
 
@@ -70,6 +73,7 @@ def fetch_food():
 if calendar.day_name[datetime.date.today().weekday()] == "Saturday" \
         or calendar.day_name[datetime.date.today().weekday()] == "Sunday":
     logging.info("Weekend -> no call on website and no other operations")
+    print("Weekend -> no call on website and no other operations")
 else:
     url = "https://www.studentenwerk-leipzig.de/mensen-cafeterien/speiseplan?location=140"  # URL
     session = HTMLSession()  # Initialize HTML Session
