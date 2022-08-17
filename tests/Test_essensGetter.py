@@ -20,7 +20,7 @@ class Test_essensGetter(unittest.TestCase):
         elif len(essensGetter.fetch_prices()) == 2:
             self.assertGreater(len(essensGetter.fetch_food()), 2)
             self.assertLess(len(essensGetter.fetch_food()), 5)
-            self.assertEquals(len(essensGetter.fetch_food_category()), 2)
+            self.assertEqual(len(essensGetter.fetch_food_category()), 2)
 
     def test_fetch_food_category(self):
         self.assertIsNot(essensGetter.fetch_food_category(), None)
