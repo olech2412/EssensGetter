@@ -2,8 +2,8 @@ from requests_html import HTMLSession
 from bs4 import BeautifulSoup as bs, Tag
 import datetime
 import calendar
-from formatting import remove_HTML, format_food_price
-from mail import send_Email
+from essensGetter.formatting import remove_HTML, format_food_price
+from essensGetter.mail import send_Email
 import logging
 
 logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w',

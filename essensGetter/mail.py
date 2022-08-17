@@ -1,7 +1,7 @@
 import smtplib
 import datetime
 import logging
-from formatting import format_string
+from essensGetter.formatting import format_string
 
 logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w',
                     format='%(asctime)s %(levelname)s - %(message)s', force=True, encoding='utf-8')
