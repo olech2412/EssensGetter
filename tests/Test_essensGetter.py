@@ -16,7 +16,7 @@ class Test_essensGetter(unittest.TestCase):
         if len(essensGetter.fetch_prices()) == 1:
             self.assertGreater(len(essensGetter.fetch_food()), 1)
             self.assertLess(len(essensGetter.fetch_food()), 3)
-            self.assertEquals(len(essensGetter.fetch_food_category()), 1)
+            self.assertEqual(len(essensGetter.fetch_food_category()), 1)
         elif len(essensGetter.fetch_prices()) == 2:
             self.assertGreater(len(essensGetter.fetch_food()), 2)
             self.assertLess(len(essensGetter.fetch_food()), 5)
