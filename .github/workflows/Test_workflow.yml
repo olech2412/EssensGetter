@@ -29,5 +29,7 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Install pytest
         run: pip install pytest
+      - name: Install requests_html
+        run: pip install requests_html
       - name: Test with pytest
         run: pytest tests/Test*.py
