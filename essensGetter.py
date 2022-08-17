@@ -13,8 +13,7 @@ logging.info("Started")
 
 def give_me_everything():
     data = soup.find_all(class_="meals")  # call everything that is in meals
-    for i in range(len(data)):  # print the property's
-        print(data[i])
+    return data
 
 
 # Fetches the prices from the website
