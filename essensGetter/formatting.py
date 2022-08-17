@@ -6,65 +6,65 @@ logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w
 
 
 # Removes the HTML from the data
-def remove_HTML(object):
-    logging.info("Before formatting: " + str(object))
-    if isinstance(object, list):
-        for i in range(len(object)):
-            first_split = str(object[i]).split(">")
+def remove_HTML(htmlContent):
+    logging.info("Before formatting: " + str(htmlContent))
+    if isinstance(htmlContent, list):
+        for i in range(len(htmlContent)):
+            first_split = str(htmlContent[i]).split(">")
             del (first_split[0])
             secondsplit = str(first_split[0]).split("</")
             del (secondsplit[1])
-            object[i] = secondsplit
-    elif isinstance(object, str):
+            htmlContent[i] = secondsplit
+    elif isinstance(htmlContent, str):
         logging.error("A string is given -> no formatting ")
         print("A string is given -> no formatting ")
     else:
         logging.error("Unknown datatype -> no formatting")
         print("Unknown datatype -> no formatting")
 
-    logging.info("After fromatting: " + str(object))
-    print("After fromatting: " + str(object))
+    logging.info("After fromatting: " + str(htmlContent))
+    print("After fromatting: " + str(htmlContent))
 
-    return object
+    return htmlContent
 
 
 # Converts the data to a usable format -> email needs ascii so no special characters
-def format_string(string):
-    logging.debug("Before formatting: " + str(string) + "\n")
-    string = str(string)
-    string = string.replace("ä", "ae")
-    string = string.replace("ö", "oe")
-    string = string.replace("ü", "ue")
-    string = string.replace("ß", "ss")
-    string = string.replace("Ä", "Ae")
-    string = string.replace("Ö", "Oe")
-    string = string.replace("Ü", "Ue")
-    string = string.replace("[", "")
-    string = string.replace("]", "")
-    string = string.replace("'", "")
-    string = string.replace("à", "a")
-    string = string.replace("è", "e")
-    string = string.replace("ì", "i")
-    string = string.replace("ò", "o")
-    string = string.replace("ù", "u")
-    string = string.replace("À", "A")
-    string = string.replace("È", "E")
-    string = string.replace("Ì", "I")
-    string = string.replace("Ò", "O")
-    string = string.replace("Ù", "U")
-    string = string.replace("â", "a")
-    string = string.replace("ê", "e")
-    string = string.replace("î", "i")
-    string = string.replace("ô", "o")
-    string = string.replace("û", "u")
-    string = string.replace("Â", "A")
-    string = string.replace("Ê", "E")
-    string = string.replace("Î", "I")
-    string = string.replace("Ô", "O")
-    string = string.replace("Û", "U")
-    string = string.replace("€", "Euro")
-    logging.debug("After formatting: " + str(string) + "\n")
-    return string
+def format_string(nonAsciiStr):
+    logging.debug("Before formatting: " + str(nonAsciiStr) + "\n")
+    nonAsciiStr = str(nonAsciiStr)
+    nonAsciiStr = nonAsciiStr.replace("ä", "ae")
+    nonAsciiStr = nonAsciiStr.replace("ö", "oe")
+    nonAsciiStr = nonAsciiStr.replace("ü", "ue")
+    nonAsciiStr = nonAsciiStr.replace("ß", "ss")
+    nonAsciiStr = nonAsciiStr.replace("Ä", "Ae")
+    nonAsciiStr = nonAsciiStr.replace("Ö", "Oe")
+    nonAsciiStr = nonAsciiStr.replace("Ü", "Ue")
+    nonAsciiStr = nonAsciiStr.replace("[", "")
+    nonAsciiStr = nonAsciiStr.replace("]", "")
+    nonAsciiStr = nonAsciiStr.replace("'", "")
+    nonAsciiStr = nonAsciiStr.replace("à", "a")
+    nonAsciiStr = nonAsciiStr.replace("è", "e")
+    nonAsciiStr = nonAsciiStr.replace("ì", "i")
+    nonAsciiStr = nonAsciiStr.replace("ò", "o")
+    nonAsciiStr = nonAsciiStr.replace("ù", "u")
+    nonAsciiStr = nonAsciiStr.replace("À", "A")
+    nonAsciiStr = nonAsciiStr.replace("È", "E")
+    nonAsciiStr = nonAsciiStr.replace("Ì", "I")
+    nonAsciiStr = nonAsciiStr.replace("Ò", "O")
+    nonAsciiStr = nonAsciiStr.replace("Ù", "U")
+    nonAsciiStr = nonAsciiStr.replace("â", "a")
+    nonAsciiStr = nonAsciiStr.replace("ê", "e")
+    nonAsciiStr = nonAsciiStr.replace("î", "i")
+    nonAsciiStr = nonAsciiStr.replace("ô", "o")
+    nonAsciiStr = nonAsciiStr.replace("û", "u")
+    nonAsciiStr = nonAsciiStr.replace("Â", "A")
+    nonAsciiStr = nonAsciiStr.replace("Ê", "E")
+    nonAsciiStr = nonAsciiStr.replace("Î", "I")
+    nonAsciiStr = nonAsciiStr.replace("Ô", "O")
+    nonAsciiStr = nonAsciiStr.replace("Û", "U")
+    nonAsciiStr = nonAsciiStr.replace("€", "Euro")
+    logging.debug("After formatting: " + str(nonAsciiStr) + "\n")
+    return nonAsciiStr
 
 
 # Format the prices -> remove HTML Stuff and unnecessary stuff
