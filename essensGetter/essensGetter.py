@@ -2,8 +2,8 @@ from requests_html import HTMLSession
 from bs4 import BeautifulSoup as bs, Tag
 import datetime
 import calendar
-from formatting import remove_HTML, format_food_price
-from mail import send_Email
+from essensGetter.formatting import remove_HTML, format_food_price
+from essensGetter.mail import send_Email
 import logging
 
 logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w',
@@ -13,8 +13,7 @@ logging.info("Started")
 
 def give_me_everything():
     data = soup.find_all(class_="meals")  # call everything that is in meals
-    for i in range(len(data)):  # print the property's
-        print(data[i])
+    return data
 
 
 # Fetches the prices from the website
