@@ -1,6 +1,6 @@
 import unittest
 import utils.formatting as formatting
-import utils.essensGetter as essensGetter
+import essensGetter
 
 class Test_formatting(unittest.TestCase):
 

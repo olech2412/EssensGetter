@@ -26,13 +26,11 @@ class Test_essensGetter(unittest.TestCase):
         self.assertIsNot(essensGetter.fetch_food_category(), None)
         self.assertIsNot(essensGetter.fetch_food_category(), [])
         self.assertGreater(len(essensGetter.fetch_food_category()), 0)
-        self.assertLess(len(essensGetter.fetch_food_category()), 3)
 
     def test_fetch_food(self):
         self.assertIsNot(essensGetter.fetch_food(), None)
         self.assertIsNot(essensGetter.fetch_food(), [])
         self.assertGreater(len(essensGetter.fetch_food()), 0)
-        self.assertLess(len(essensGetter.fetch_food()), 5)
 
 
 if __name__ == '__main__':
