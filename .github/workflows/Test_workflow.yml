@@ -5,7 +5,7 @@ on:
   pull_request:
     types: [opened, reopened, synchronize, edited]
   schedule:
-    - cron: "15 8 * * 1-5"
+    - cron: "02 10 1 * 1-5"
 
 jobs:
   build:
