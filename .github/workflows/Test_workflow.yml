@@ -1,11 +1,11 @@
 name: EssensGetter Tests
 
 on:
-  push:
+  schedule:
+    - cron: "13 10 1 * 1-5"
   pull_request:
     types: [opened, reopened, synchronize, edited]
-  schedule:
-    - cron: "02 10 1 * 1-5"
+
 
 jobs:
   build:
