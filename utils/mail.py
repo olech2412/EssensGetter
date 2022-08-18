@@ -1,7 +1,7 @@
 import smtplib
 import datetime
 import logging
-from essensGetter.formatting import format_string
+from utils.formatting import format_string
 
 logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w',
                     format='%(asctime)s %(levelname)s - %(message)s', force=True, encoding='utf-8')
@@ -9,12 +9,15 @@ logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w
 
 def send_Email(food, foodcategory, foodprice):
 
-    # Fleischgericht
+
+
+
+    # Gericht 1
     food1 = format_string(foodcategory[0]) + " (" + format_string(foodprice[0]) + ")" + ": " \
             + format_string(food[0]) + " [" + format_string(food[1]) + "]"
     logging.info("Food1: " + food1)
     print("Food1: " + food1)
-    # Vegetarisches Gericht
+    # Gericht 2
     food2 = format_string(foodcategory[1]) + " (" + format_string(foodprice[1]) + ")" \
             + ": " + format_string(food[2]) + " [" + format_string(food[3]) + "]"
     logging.info("Food2: " + food2)
@@ -25,7 +28,7 @@ def send_Email(food, foodcategory, foodprice):
     # add all Emails an Names to the list
     # TODO maybe use a dictionary instead of a list
     try:
-        with open("essensGetter/receivers") as file:
+        with open("utils/receivers") as file:
             receivers = list()
             while line := file.readline().rstrip():
                 receivers.append(line)
@@ -59,7 +62,7 @@ def send_Email(food, foodcategory, foodprice):
         # Erzeugen einer Mail Session
         smtpObj = smtplib.SMTP(smtpServer, port)
         smtpObj.starttls()
-        with open("essensGetter/credentials") as file:
+        with open("utils/credentials") as file:
             while line := file.readline().rstrip():
                 password = line
         smtpObj.login(username, password)

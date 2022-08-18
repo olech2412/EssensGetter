@@ -1,5 +1,5 @@
 import unittest
-import essensGetter.essensGetter as essensGetter
+import essensGetter
 
 
 class Test_essensGetter(unittest.TestCase):

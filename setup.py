@@ -1,1 +1,1 @@
-packages = ['essensGetter', 'tests']
+packages = ['utils', 'tests']
