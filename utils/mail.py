@@ -69,7 +69,7 @@ def send_Email(food, foodcategory, foodprice):
 
         for i in range(len(names)):
             message = 'Subject: {}\n\n{}'.format(SUBJECT.format(names[i]), content.format(names[i]))
-            smtpObj.sendmail(sender, emails[i], message)
+            #smtpObj.sendmail(sender, emails[i], message)
 
         smtpObj.quit()
         logging.info("Email sent successfully to: " + str(names))

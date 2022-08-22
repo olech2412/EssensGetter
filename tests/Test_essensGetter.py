@@ -16,16 +16,16 @@ class Test_essensGetter(unittest.TestCase):
         if len(essensGetter.fetch_prices()) == 1:
             self.assertGreater(len(essensGetter.fetch_food()), 1)
             self.assertLess(len(essensGetter.fetch_food()), 3)
-            self.assertEqual(len(essensGetter.fetch_food_category()), 1)
+            self.assertEqual(len(essensGetter.fetch_food_as_lists()), 1)
         elif len(essensGetter.fetch_prices()) == 2:
             self.assertGreater(len(essensGetter.fetch_food()), 2)
             self.assertLess(len(essensGetter.fetch_food()), 5)
-            self.assertEqual(len(essensGetter.fetch_food_category()), 2)
+            self.assertEqual(len(essensGetter.fetch_food_as_lists()), 2)
 
     def test_fetch_food_category(self):
-        self.assertIsNot(essensGetter.fetch_food_category(), None)
-        self.assertIsNot(essensGetter.fetch_food_category(), [])
-        self.assertGreater(len(essensGetter.fetch_food_category()), 0)
+        self.assertIsNot(essensGetter.fetch_food_as_lists(), None)
+        self.assertIsNot(essensGetter.fetch_food_as_lists(), [])
+        self.assertGreater(len(essensGetter.fetch_food_as_lists()), 0)
 
     def test_fetch_food(self):
         self.assertIsNot(essensGetter.fetch_food(), None)

@@ -9,5 +9,5 @@ class Test_formatting(unittest.TestCase):
 
     def test_format_string(self):
         self.assertTrue(str(formatting.format_string(essensGetter.fetch_food())).isascii())
-        self.assertTrue(str(formatting.format_string(essensGetter.fetch_food_category())).isascii())
+        self.assertTrue(str(formatting.format_string(essensGetter.fetch_food_as_lists())).isascii())
         self.assertTrue(str(formatting.format_string(essensGetter.fetch_prices())).isascii())
