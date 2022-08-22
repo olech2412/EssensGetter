@@ -93,22 +93,22 @@ def fetch_food():
 
 
 # don't do anything on weekends
-#if calendar.day_name[datetime.date.today().weekday()] == "Saturday" \
-#        or calendar.day_name[datetime.date.today().weekday()] == "Sunday":
- #   logging.info("Weekend -> no call on website and no other operations")
-#    print("Weekend -> no call on website and no other operations")
-#else:
-url = "https://www.studentenwerk-leipzig.de/mensen-cafeterien/speiseplan?location=140&date=2022-08-22&criteria=&meal_type=all"  # URL
-session = HTMLSession()  # Initialize HTML Session
-response = session.get(url)  # call the URL
-
-if response.status_code != 200:  # If response != 200 don't try to read the data
-    logging.critical("Response != 200 " + str(response.status_code))
+if calendar.day_name[datetime.date.today().weekday()] == "Saturday" \
+        or calendar.day_name[datetime.date.today().weekday()] == "Sunday":
+   logging.info("Weekend -> no call on website and no other operations")
+   print("Weekend -> no call on website and no other operations")
 else:
-    soup = bs(response.content, "html.parser")  # html parser from BeautifulSoup
+    url = "https://www.studentenwerk-leipzig.de/mensen-cafeterien/speiseplan?location=140&date=2022-08-26&criteria=&meal_type=all"  # URL
+    session = HTMLSession()  # Initialize HTML Session
+    response = session.get(url)  # call the URL
 
-    # give_me_everything() # Important to know which property's you can extract
-    # convert the HTML List to usable data
-    food = format_meals_from_list(fetch_food_as_lists())
-    foodprice = format_food_price(fetch_prices())  # call the function to convert the HTML Stuff to usable data
-    send_Email(food=fetch_food(), foodcategory=fetch_food_as_lists(), foodprice=foodprice)
+    if response.status_code != 200:  # If response != 200 don't try to read the data
+        logging.critical("Response != 200 " + str(response.status_code))
+    else:
+        soup = bs(response.content, "html.parser")  # html parser from BeautifulSoup
+
+        # give_me_everything() # Important to know which property's you can extract
+        # convert the HTML List to usable data
+        food = format_meals_from_list(fetch_food_as_lists())
+        foodprice = format_food_price(fetch_prices())  # call the function to convert the HTML Stuff to usable data
+        send_Email(food=fetch_food(), foodcategory=fetch_food_as_lists(), foodprice=foodprice)
