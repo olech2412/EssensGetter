@@ -7,26 +7,27 @@ logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w
                     format='%(asctime)s %(levelname)s - %(message)s', force=True, encoding='utf-8')
 
 
-def send_Email(food, foodcategory, foodprice):
+def send_Email(meals):
+    actual_meals = list()
+    for x in meals:
+        if len(x) == 5:
+            food_list_conv = list()
 
+            for y in x["food"]:
+                food_list_conv.append(format_string(y) + " - " + format_string(x["price"][x["food"].index(y)]) + "\n")
 
-
-
-    # Gericht 1
-    food1 = format_string(foodcategory[0]) + " (" + format_string(foodprice[0]) + ")" + ": " \
-            + format_string(food[0]) + " [" + format_string(food[1]) + "]"
-    logging.info("Food1: " + food1)
-    print("Food1: " + food1)
-    # Gericht 2
-    food2 = format_string(foodcategory[1]) + " (" + format_string(foodprice[1]) + ")" \
-            + ": " + format_string(food[2]) + " [" + format_string(food[3]) + "]"
-    logging.info("Food2: " + food2)
-    print("Food2: " + food2)
+            food = format_string(str(x["category"]) + " --" + str(x["additional_info"])) + "-- : \n" + "".join(
+                food_list_conv)
+            actual_meals.append(food)
+        elif len(x) == 4:
+            food = format_string(str(x["category"])) + ": " + "\n" + format_string(str(x["food"])) \
+                   + " [" + format_string(str(x["beilagen"])) + "]" + " - " + format_string(str(x["price"])) \
+                   + "\n"
+            actual_meals.append(food)
 
     current_day = str(datetime.date.strftime(datetime.date.today(), "%d.%m.%Y"))
 
-    # add all Emails an Names to the list
-    # TODO maybe use a dictionary instead of a list
+    # add all Emails and Names to the list
     try:
         with open("utils/receivers") as file:
             receivers = list()
@@ -46,7 +47,8 @@ def send_Email(food, foodcategory, foodprice):
             names.append(receivers[x])
 
     content = "Moin {}, \n \n" + "Schau dir an was es heute in der Kantine (Schoenauer Strasse) zu essen gibt: \n \n" \
-              + food1 + "\n" + food2 + "\n \n" + "Bis denne," + "\n" + "dein Food-Bot - " + current_day
+              + actual_meals[0] + "\n" + actual_meals[
+                  1] + "\n \n" + "Bis denne," + "\n" + "dein Food-Bot - " + current_day
 
     logging.info("Content: " + content)
 
@@ -69,7 +71,7 @@ def send_Email(food, foodcategory, foodprice):
 
         for i in range(len(names)):
             message = 'Subject: {}\n\n{}'.format(SUBJECT.format(names[i]), content.format(names[i]))
-            #smtpObj.sendmail(sender, emails[i], message)
+            smtpObj.sendmail(sender, emails[i], message)
 
         smtpObj.quit()
         logging.info("Email sent successfully to: " + str(names))

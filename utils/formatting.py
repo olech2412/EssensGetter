@@ -68,6 +68,7 @@ def format_string(nonAsciiStr):
     nonAsciiStr = nonAsciiStr.replace("Ô", "O")
     nonAsciiStr = nonAsciiStr.replace("Û", "U")
     nonAsciiStr = nonAsciiStr.replace("€", "Euro")
+    nonAsciiStr = nonAsciiStr.replace("\"", "")
     logging.debug("After formatting: " + str(nonAsciiStr) + "\n")
     return nonAsciiStr
 
