@@ -10,6 +10,8 @@ logging.basicConfig(filename='essensGetter.log', level=logging.INFO, filemode='w
 def send_Email(meals):
     actual_meals = list()
     for x in meals:
+        if x["beilagen"] == []:
+            x["beilagen"].append("Keine Beilagen")
         if len(x) == 5:
             food_list_conv = list()
 
