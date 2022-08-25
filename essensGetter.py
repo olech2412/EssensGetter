@@ -1,9 +1,9 @@
 from requests_html import HTMLSession
 from bs4 import BeautifulSoup as bs
-from bs4.element import Tag, NavigableString
+from bs4.element import NavigableString
 import datetime
 import calendar
-from utils.formatting import remove_HTML, format_food_price, format_meals_from_list
+from utils.formatting import format_meals_from_list
 from utils.mail import send_Email
 import logging
 
@@ -27,7 +27,7 @@ def fetch_food_from_website():
     list_of_all_meals = list()
 
     for x in html_class_meals:
-        if isinstance(x,NavigableString):
+        if isinstance(x, NavigableString):
             html_class_meals.remove(x)
 
     for x in food_categorys:
@@ -40,7 +40,7 @@ def fetch_food_from_website():
         for y in html_class_meals[count:list_of_categorys_index[food_categorys.index(x) + 1]:1]:
             one_meal.append(y)
 
-            if html_class_meals.index(y) == list_of_categorys_index[food_categorys.index(x) + 1] -1:
+            if html_class_meals.index(y) == list_of_categorys_index[food_categorys.index(x) + 1] - 1:
                 list_of_all_meals.append(one_meal)
 
     return list_of_all_meals
@@ -49,8 +49,8 @@ def fetch_food_from_website():
 # don't do anything on weekends
 if calendar.day_name[datetime.date.today().weekday()] == "Saturday" \
         or calendar.day_name[datetime.date.today().weekday()] == "Sunday":
-   logging.info("Weekend -> no call on website and no other operations")
-   print("Weekend -> no call on website and no other operations")
+    logging.info("Weekend -> no call on website and no other operations")
+    print("Weekend -> no call on website and no other operations")
 else:
     url = "https://www.studentenwerk-leipzig.de/mensen-cafeterien/speiseplan?location=140"  # URL
     session = HTMLSession()  # Initialize HTML Session
@@ -64,4 +64,5 @@ else:
         # give_me_everything() # Important to know which property's you can extract
         # convert the HTML List to usable data
         meals = format_meals_from_list(fetch_food_from_website())
+        test = meals
         send_Email(meals)
