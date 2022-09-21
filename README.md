@@ -1,6 +1,5 @@
 # EssensGetter
 
-[![EssensGetter Test](https://github.com/olech2412/EssensGetter/blob/master/.github/workflows/Test_workflow.yml/badge.svg)](https://github.com/olech2412/EssensGetter/blob/master/.github/workflows/Test_workflow.yml)
 
 
 With EssensGetter you can easily look up what food is served in the canteen of the Berufsakademie Leipzig.
