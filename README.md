@@ -1,6 +1,7 @@
 # EssensGetter
 
 [![EssensGetter Tests](https://github.com/olech2412/EssensGetter/actions/workflows/Test_workflow.yml/badge.svg?branch=master)](https://github.com/olech2412/EssensGetter/actions/workflows/Test_workflow.yml)
+[![CodeQL](https://github.com/olech2412/EssensGetter/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/olech2412/EssensGetter/actions/workflows/codeql-analysis.yml)
 
 With EssensGetter you can easily look up what food is served in the canteen of the Berufsakademie Leipzig.
 Currently, this service is only available for the canteen "Mensa Schönauer Straße". This python programm allows you to call
